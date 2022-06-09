@@ -8,9 +8,9 @@ function App() {
     <div className={styles['app-content']}>
       <Navbar />
 
-      <div>
+      <main>
         <Home />
-      </div>
+      </main>
     </div>
   );
 }

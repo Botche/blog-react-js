@@ -14,9 +14,9 @@ function BlogList(props) {
         <div>
             <h2>{props.title}</h2>
 
-            <div>
+            <section>
                 {blogs.map(blog => (<Blog blog={blog} styles={blogStyles} key={blog.id} />))}
-            </div>
+            </section>
         </div>
     );
 }
