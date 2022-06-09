@@ -1,0 +1,21 @@
+.error-container{
+    position: relative; 
+
+    display: inline-block !important;
+
+    margin-top: 10px;
+
+    box-shadow: 1px 1px 1px #aaaaaa;
+    border-radius: 0 !important;
+
+    padding: 10px !important;
+
+    width: 100%;
+    background: #f1356d !important;
+
+    text-align: center;
+
+    &__message {
+        color: #ffffff;
+    }
+}
