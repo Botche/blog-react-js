@@ -1,0 +1,20 @@
+.blog-preview {
+    margin: 20px 0;
+
+    border-bottom: 1px solid #fafafa;
+
+    padding: 10px 16px;
+    
+    &:hover {
+        box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+
+        cursor: pointer;
+    }
+
+    &__heading {
+        margin-bottom: 8px;
+
+        font-size: 20px;
+        color: #f1356d;
+    }
+}

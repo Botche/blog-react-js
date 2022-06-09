@@ -6,8 +6,6 @@
 
     border-bottom: 1px solid #f2f2f2;
 
-    max-width: 600px;
-
     padding: 20px;
 
     &__heading {
@@ -26,13 +24,5 @@
         &:hover {
             color: #f1356d;
         }
-    }
-
-    .content {
-        margin: 40px auto;
-
-        max-width: 600px;
-
-        padding: 20px;
     }
 }
