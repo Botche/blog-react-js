@@ -5,9 +5,10 @@ import Home from 'pages/Home';
 
 import styles from './styles.module.scss';
 import constants from 'utils/constants';
+import Create from 'components/Blog/Create';
 
 function App() {
-
+  const routes = constants.routes;
 
   return (
     <Router>
@@ -17,7 +18,7 @@ function App() {
         <main>
           <Routes>
             <Route index element={<Home />} />
-            <Route path={constants.newBlogRoute} element={<></>} />
+            <Route path={routes.newBlogRoute} element={<Create />} />
           </Routes>
         </main>
       </div>

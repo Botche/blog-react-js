@@ -11,7 +11,7 @@ function Home() {
         data: blogs, 
         isLoading, 
         error
-    } = useFetch(constants.blogsUrl);
+    } = useFetch(constants.urls.blogsUrl);
 
     return (
         <div>
