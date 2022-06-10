@@ -1,0 +1,22 @@
+.button-container {
+    &__button {
+        background: #f1356d;
+
+        border: 0;
+        border-radius: 8px;
+
+        padding: 8px;
+
+        color: #fff;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:disabled {
+            background: #ce134b;
+
+            cursor: not-allowed;
+        }
+    }
+}
