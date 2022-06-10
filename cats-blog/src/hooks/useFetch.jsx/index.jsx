@@ -7,8 +7,12 @@ function useFetch(url) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const abortController = new AbortController();
+
     useEffect(() => {
-        fetch(url)
+        fetch(url, {
+            signal: abortController.signal,
+        })
             .then(response => {
                 if (response.ok === false) {
                     throw Error(messages.errorFetchingResourse); 
@@ -23,9 +27,16 @@ function useFetch(url) {
             })
             .catch(error => {
                 setIsLoading(false);
+                
+                if (error.name === 'AbortError') {
+                    return;
+                }
+                
                 setError(error.message);
             });
-    }, [url]);
+
+        return () => abortController.abort();
+    }, [abortController, url]);
 
     return {
         data,
