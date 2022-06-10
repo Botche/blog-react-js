@@ -1,17 +1,27 @@
-import styles from './styles.module.scss';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Navbar from 'components/Navbar';
 import Home from 'pages/Home';
 
-function App() {
-  return (
-    <div className={styles['app-content']}>
-      <Navbar />
+import styles from './styles.module.scss';
+import constants from 'utils/constants';
 
-      <main>
-        <Home />
-      </main>
-    </div>
+function App() {
+
+
+  return (
+    <Router>
+      <div className={styles['app-content']}>
+        <Navbar />
+
+        <main>
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path={constants.newBlogRoute} element={<></>} />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
