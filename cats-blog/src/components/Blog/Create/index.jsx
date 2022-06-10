@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Input from 'components/Input';
 import Button from 'components/Button';
+import FormErrors from 'components/FormErrors';
 
 import styles from './styles.module.scss';
 import constants from 'utils/constants';
@@ -15,6 +16,7 @@ function Create() {
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('Mario');
     const [isPending, setIsPending] = useState(false);
+    const [formErrors, setFormErrors] = useState({});
 
     const selectOptions = new Map();
     selectOptions.set('Mario', 'Mario');
@@ -24,8 +26,51 @@ function Create() {
         document.title = generatePageTitle('Create new blog');
     }, []);
 
+    const handleValidation = () => {
+        let formIsValid = true;
+        let errors = {};
+
+        // Title
+        if (!title) {
+            formIsValid = false;
+            errors['title'] = "Title cannot be empty!";
+        } else if (title.length < 3) {
+            formIsValid = false;
+            errors['title'] = "Title's length must be more than 3 symbols!";
+        }
+
+        // Body
+        if (!body) {
+            formIsValid = false;
+            errors['body'] = "Body cannot be empty!";
+        } else if (body.length <= 50) {
+            formIsValid = false;
+            errors['body'] = "Body's length must be more than or equal to 50 symbols!";
+        }
+
+        // Author
+        const authors = [
+            'Mario',
+            'Yoshi',
+        ];
+        if (!author) {
+            formIsValid = false;
+            errors['author'] = "Author cannot be empty!";
+        } else if (!authors.includes(author)) {
+            formIsValid = false;
+            errors['author'] = "The author must be selected from the dropdown!";
+        }
+        
+        setFormErrors(errors);
+        return formIsValid;
+    }
+
     const handleSumbit = (e) => {
         e.preventDefault();
+        if (!handleValidation()) {
+            return;
+        }
+        
         setIsPending(true);
         
         const blog = {
@@ -55,6 +100,7 @@ function Create() {
     return (
         <div className={styles['create-blog']}>
             <h1 className={styles['create-blog__heading']}>Add a new blog</h1>
+            <FormErrors formErrors={formErrors} />
             <form>
                 <Input 
                     key='title'

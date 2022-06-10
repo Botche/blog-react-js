@@ -7,6 +7,7 @@ import Input from 'components/Input';
 import Button from 'components/Button';
 import Spinner from 'components/Spinner';
 import Error from 'components/Error';
+import FormErrors from 'components/FormErrors';
 
 import constants from 'utils/constants';
 import { generatePageTitle } from 'utils/helperFunctions';
@@ -20,6 +21,7 @@ function Update() {
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('Mario');
     const [isPending, setIsPending] = useState(false);
+    const [formErrors, setFormErrors] = useState({});
 
     const blogDetailsUrl = constants.urls.blogDetailsUrl.replace(':id', id);
     const { data: blog, isLoading, error } = useFetch(blogDetailsUrl);
@@ -38,8 +40,50 @@ function Update() {
         }
     }, [blog]);
 
+    const handleValidation = () => {
+        let formIsValid = true;
+        let errors = {};
+
+        // Title
+        if (!title) {
+            formIsValid = false;
+            errors['title'] = "Title cannot be empty!";
+        } else if (title.length < 3) {
+            formIsValid = false;
+            errors['title'] = "Title's length must be more than 3 symbols!";
+        }
+
+        // Body
+        if (!body) {
+            formIsValid = false;
+            errors['body'] = "Body cannot be empty!";
+        } else if (body.length <= 50) {
+            formIsValid = false;
+            errors['body'] = "Body's length must be more than or equal to 50 symbols!";
+        }
+
+        // Author
+        const authors = [
+            'Mario',
+            'Yoshi',
+        ];
+        if (!author) {
+            formIsValid = false;
+            errors['author'] = "Author cannot be empty!";
+        } else if (!authors.includes(author)) {
+            formIsValid = false;
+            errors['author'] = "The author must be selected from the dropdown!";
+        }
+        
+        setFormErrors(errors);
+        return formIsValid;
+    }
+
     const handleSumbit = (e) => {
         e.preventDefault();
+        if (!handleValidation()) {
+            return;
+        }
         setIsPending(true);
         
         const blog = {
@@ -74,6 +118,7 @@ function Update() {
             { blog && (
                 <div className={styles['create-blog']}>
                     <h1 className={styles['create-blog__heading']}>Update "{blog.title}"</h1>
+                    <FormErrors formErrors={formErrors} />
                     <form>
                         <Input 
                             key='title'

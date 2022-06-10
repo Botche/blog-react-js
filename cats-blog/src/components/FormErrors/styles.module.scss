@@ -1,0 +1,14 @@
+.form-errors {
+
+    &__error {
+        border-radius: 5px;
+
+        width: 100%;
+
+        padding: 10px;
+
+        background-color: #f1356d;
+
+        color: #ffffff;
+    }
+}
