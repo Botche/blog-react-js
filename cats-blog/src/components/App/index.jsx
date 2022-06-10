@@ -1,12 +1,14 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import Navbar from 'components/Navbar';
 import Home from 'pages/Home';
+import NotFound from 'pages/NotFound';
+
+import Navbar from 'components/Navbar';
+import Create from 'components/Blog/Create';
+import Details from 'components/Blog/Details';
 
 import styles from './styles.module.scss';
 import constants from 'utils/constants';
-import Create from 'components/Blog/Create';
-import Details from 'components/Blog/Details';
 
 function App() {
   const routes = constants.routes;
@@ -21,6 +23,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path={routes.newBlogRoute} element={<Create />} />
             <Route path={routes.blogDetailsRoute} element={<Details />} />
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </main>
       </div>
