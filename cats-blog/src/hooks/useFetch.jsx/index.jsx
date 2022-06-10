@@ -9,9 +9,12 @@ function useFetch(url) {
 
     useEffect(() => {
         const abortController = new AbortController();
-
         fetch(url, {
-            signal: abortController.signal,
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            signal: abortController.signal
         })
             .then(response => {
                 if (response.ok === false) {
