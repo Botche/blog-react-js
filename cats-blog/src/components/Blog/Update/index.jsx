@@ -90,7 +90,7 @@ function Update() {
         if (!categoryId) {
             formIsValid = false;
             errors['category'] = "Category cannot be empty!";
-        } else if (!categories.some(c => c.id == categoryId)) {
+        } else if (!categories.some(c => c.id.toString() === categoryId)) {
             formIsValid = false;
             errors['category'] = "The Category must be selected from the dropdown!";
         }

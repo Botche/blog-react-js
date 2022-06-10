@@ -84,7 +84,7 @@ function Create() {
         if (!category) {
             formIsValid = false;
             errors['category'] = "Category cannot be empty!";
-        } else if (!categories.some(c => c.id == category)) {
+        } else if (!categories.some(c => c.id.toString() === category)) {
             formIsValid = false;
             errors['category'] = "The Category must be selected from the dropdown!";
         }
