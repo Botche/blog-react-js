@@ -22,9 +22,9 @@ function Blog(props) {
     };
 
     return (
-        <div>
+        <div className={props.styles['blog-preview']}>
             {category && (
-                <article className={props.styles['blog-preview']} key={blog.id}>
+                <article key={blog.id}>
                     <Link to={blogDetailsRoute}>
                         <h3 className={props.styles['blog-preview__heading']}>{blog.title} : {category.name}</h3>
                         <p>

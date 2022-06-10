@@ -31,8 +31,8 @@ function Create() {
 
     useEffect(() => {
         document.title = generatePageTitle('Create new blog');
-
-        if (categories) {
+        
+        if (categories && categories.length !== 0) {
             setCategory(categories[0].id);
         }
     }, [categories]);
