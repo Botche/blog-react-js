@@ -7,9 +7,9 @@ function useFetch(url) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const abortController = new AbortController();
-
     useEffect(() => {
+        const abortController = new AbortController();
+
         fetch(url, {
             signal: abortController.signal,
         })
@@ -36,7 +36,7 @@ function useFetch(url) {
             });
 
         return () => abortController.abort();
-    }, [abortController, url]);
+    }, [url]);
 
     return {
         data,
