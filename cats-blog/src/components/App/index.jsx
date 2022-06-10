@@ -6,6 +6,7 @@ import Home from 'pages/Home';
 import styles from './styles.module.scss';
 import constants from 'utils/constants';
 import Create from 'components/Blog/Create';
+import Details from 'components/Blog/Details';
 
 function App() {
   const routes = constants.routes;
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route index element={<Home />} />
             <Route path={routes.newBlogRoute} element={<Create />} />
+            <Route path={routes.blogDetailsRoute} element={<Details />} />
           </Routes>
         </main>
       </div>
