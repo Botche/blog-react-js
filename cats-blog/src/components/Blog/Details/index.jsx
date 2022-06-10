@@ -14,7 +14,7 @@ import { generatePageTitle } from 'utils/helperFunctions';
 function Details() {
     const { id } = useParams();
     const navigate = useNavigate();
-    const blogDetailsUrl = constants.urls.blogDetailsUrl.replace(':id', id);
+    const blogDetailsUrl = constants.urls.blogUrl.replace(':id', id);
     const { data: blog, error, isLoading } = useFetch(blogDetailsUrl);
 
     useEffect(() => {
@@ -24,7 +24,7 @@ function Details() {
     }, [blog]);
 
     const handleDelete = () => {
-        const deleteBlogUrl = constants.urls.blogDetailsUrl.replace(':id', id);
+        const deleteBlogUrl = constants.urls.blogUrl.replace(':id', id);
         fetch(deleteBlogUrl, {
             method: 'DELETE',
         })

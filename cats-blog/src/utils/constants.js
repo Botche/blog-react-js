@@ -15,9 +15,10 @@ const constants = {
         baseUrl: baseUrl,
 
         blogsUrl: baseUrl + '/blogs',
-        blogDetailsUrl: baseUrl + '/blogs/:id',
+        blogUrl: baseUrl + '/blogs/:id',
 
         categoriesUrl: baseUrl + '/categories',
+        categoryUrl: baseUrl + '/categories/:id',
     },
 };
 

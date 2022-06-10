@@ -23,7 +23,7 @@ function Update() {
     const [isPending, setIsPending] = useState(false);
     const [formErrors, setFormErrors] = useState({});
 
-    const blogDetailsUrl = constants.urls.blogDetailsUrl.replace(':id', id);
+    const blogDetailsUrl = constants.urls.blogUrl.replace(':id', id);
     const { data: blog, isLoading, error } = useFetch(blogDetailsUrl);
 
     const selectOptions = new Map();
@@ -92,7 +92,7 @@ function Update() {
             author,
         };
         
-        const blogUpdateUrl = constants.urls.blogDetailsUrl.replace(':id', id);
+        const blogUpdateUrl = constants.urls.blogUrl.replace(':id', id);
         fetch(blogUpdateUrl, {
             method: 'PATCH',
             headers: {
