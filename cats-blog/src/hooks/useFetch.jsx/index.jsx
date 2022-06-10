@@ -1,6 +1,6 @@
-import messages from "utils/messages";
-
 import { useEffect, useState } from "react";
+
+import messages from "utils/messages";
 
 function useFetch(url) {
     const [data, setData] = useState(null);

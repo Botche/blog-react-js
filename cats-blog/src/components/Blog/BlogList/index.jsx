@@ -1,4 +1,4 @@
-import Blog from '..';
+import Blog from 'components/Blog';
 
 import styles from './styles.module.scss';
 
