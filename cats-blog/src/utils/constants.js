@@ -9,6 +9,7 @@ const constants = {
     urls: {
         baseUrl: baseUrl,
         blogsUrl: baseUrl + '/blogs',
+        blogDetailsUrl: baseUrl + '/blogs/:id',
     },
 };
 
