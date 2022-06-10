@@ -1,9 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import useFetch from 'hooks/useFetch.jsx';
 
 import Input from 'components/Input';
 import Button from 'components/Button';
 import FormErrors from 'components/FormErrors';
+import Spinner from 'components/Spinner';
+import Error from 'components/Error';
 
 import styles from './styles.module.scss';
 import constants from 'utils/constants';
@@ -15,16 +19,31 @@ function Create() {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('Mario');
+    const [category, setCategory] = useState();
     const [isPending, setIsPending] = useState(false);
     const [formErrors, setFormErrors] = useState({});
 
-    const selectOptions = new Map();
-    selectOptions.set('Mario', 'Mario');
-    selectOptions.set('Yoshi', 'Yoshi');
+    const { data: categories, isLoading, error } = useFetch(constants.urls.categoriesUrl);
+
+    const authorOptions = new Map();
+    authorOptions.set('Mario', 'Mario');
+    authorOptions.set('Yoshi', 'Yoshi');
 
     useEffect(() => {
         document.title = generatePageTitle('Create new blog');
-    }, []);
+
+        if (categories) {
+            setCategory(categories[0].id);
+        }
+    }, [categories]);
+
+    const generateCategoriesOptions = () => {
+        const categoriesOptions = new Map();
+
+        categories.map(category => categoriesOptions.set(category.id, category.name));
+
+        return categoriesOptions;
+    };
 
     const handleValidation = () => {
         let formIsValid = true;
@@ -61,6 +80,15 @@ function Create() {
             errors['author'] = "The author must be selected from the dropdown!";
         }
         
+        // Category
+        if (!category) {
+            formIsValid = false;
+            errors['category'] = "Category cannot be empty!";
+        } else if (!categories.some(c => c.id === category)) {
+            formIsValid = false;
+            errors['category'] = "The Category must be selected from the dropdown!";
+        }
+
         setFormErrors(errors);
         return formIsValid;
     }
@@ -77,6 +105,7 @@ function Create() {
             title,
             body,
             author,
+            category
         };
         
         fetch(constants.urls.blogsUrl, {
@@ -98,56 +127,72 @@ function Create() {
     }
 
     return (
-        <div className={styles['create-blog']}>
-            <h1 className={styles['create-blog__heading']}>Add a new blog</h1>
-            <FormErrors formErrors={formErrors} />
-            <form>
-                <Input 
-                    key='title'
-                    id='title' 
-                    name='title'
-                    isRequired={true} 
-                    label='Blog Title' 
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    type='text'
-                />
-                <Input 
-                    key='body'
-                    id='body' 
-                    name='body'
-                    isRequired={true} 
-                    label='Blog Body' 
-                    value={body}
-                    onChange={(e) => setBody(e.target.value)}
-                    type='textarea'
-                />
-                <Input 
-                    key='author'
-                    id='author' 
-                    name='author'
-                    label='Blog Author' 
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                    type='select'
-                    options={selectOptions}
-                />
-                
-                {
-                    !isPending ? ( 
-                        <Button
-                            onClick={handleSumbit} 
-                            text="Add Blog"
+       <div>
+            { error && (<Error message={error} />) }
+            { isLoading && <Spinner />}
+            { categories && (
+                <div className={styles['create-blog']}>
+                    <h1 className={styles['create-blog__heading']}>Add a new blog</h1>
+                    <FormErrors formErrors={formErrors} />
+                    <form>
+                        <Input 
+                            key='title'
+                            id='title' 
+                            name='title'
+                            isRequired={true} 
+                            label='Blog Title' 
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            type='text'
                         />
-                    ) : (
-                        <Button
-                            isDisabled={true} 
-                            text="Adding Blog..."
+                        <Input 
+                            key='body'
+                            id='body' 
+                            name='body'
+                            isRequired={true} 
+                            label='Blog Body' 
+                            value={body}
+                            onChange={(e) => setBody(e.target.value)}
+                            type='textarea'
                         />
-                    )
-                }
-            </form>
-        </div>
+                        <Input 
+                            key='author'
+                            id='author' 
+                            name='author'
+                            label='Blog Author' 
+                            value={author}
+                            onChange={(e) => setAuthor(e.target.value)}
+                            type='select'
+                            options={authorOptions}
+                        />
+                        <Input 
+                            key='cateogy'
+                            id='cateogy' 
+                            name='cateogy'
+                            label='Blog Category' 
+                            value={category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            type='select'
+                            options={generateCategoriesOptions()}
+                        />
+                        
+                        {
+                            !isPending ? ( 
+                                <Button
+                                    onClick={handleSumbit} 
+                                    text="Add Blog"
+                                />
+                            ) : (
+                                <Button
+                                    isDisabled={true} 
+                                    text="Adding Blog..."
+                                />
+                            )
+                        }
+                    </form>
+                </div>
+            )}
+       </div>
     );
 } 
 
