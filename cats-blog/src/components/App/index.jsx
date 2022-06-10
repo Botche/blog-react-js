@@ -6,6 +6,7 @@ import NotFound from 'pages/NotFound';
 import Navbar from 'components/Navbar';
 import Create from 'components/Blog/Create';
 import Details from 'components/Blog/Details';
+import Update from 'components/Blog/Update';
 
 import styles from './styles.module.scss';
 import constants from 'utils/constants';
@@ -23,6 +24,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path={routes.newBlogRoute} element={<Create />} />
             <Route path={routes.blogDetailsRoute} element={<Details />} />
+            <Route path={routes.blogUpdateRoute} element={<Update />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </main>

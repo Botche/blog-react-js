@@ -2,7 +2,6 @@
     &__heading {
         margin-bottom: 10px;
 
-        font-size: 20px;
         color: #f1356d;
     }
 
@@ -15,12 +14,10 @@
         margin: 20px 0;
     }
 
-    &__delete-button {
-        background: #f1356d;
-        color: #fff;
-        border: 0;
-        padding: 8px;
-        border-radius: 8px;
-        cursor: pointer;
+    &__buttons-container {
+        display: flex;
+        justify-content: space-between;
+        
+        width: 150px;
     }
 }

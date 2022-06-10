@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Input from 'components/Input';
+import Button from 'components/Button';
 
 import styles from './styles.module.scss';
-import Button from 'components/Button';
 import constants from 'utils/constants';
+import { generatePageTitle } from 'utils/helperFunctions';
 
 function Create() {
     const navigate = useNavigate();
@@ -18,6 +19,10 @@ function Create() {
     const selectOptions = new Map();
     selectOptions.set('Mario', 'Mario');
     selectOptions.set('Yoshi', 'Yoshi');
+
+    useEffect(() => {
+        document.title = generatePageTitle('Create new blog');
+    }, []);
 
     const handleSumbit = (e) => {
         e.preventDefault();
@@ -49,7 +54,7 @@ function Create() {
 
     return (
         <div className={styles['create-blog']}>
-            <h2 className={styles['create-blog__heading']}>Add a new blog</h2>
+            <h1 className={styles['create-blog__heading']}>Add a new blog</h1>
             <form>
                 <Input 
                     key='title'

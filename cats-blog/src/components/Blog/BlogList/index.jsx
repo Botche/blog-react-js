@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
+
 import Blog from 'components/Blog';
 
 import styles from './styles.module.scss';
+import { generatePageTitle } from 'utils/helperFunctions';
 
 function BlogList(props) {
     const blogs = props.blogs;
@@ -10,9 +13,13 @@ function BlogList(props) {
         'blog-preview__author': styles['blog-preview__author'],
     };
 
+    useEffect(() => {
+        document.title = generatePageTitle('Blogs');
+    }, []);
+
     return (
         <div>
-            <h2>{props.title}</h2>
+            <h1>{props.title}</h1>
 
             <section>
                 {blogs.map(blog => (<Blog blog={blog} styles={blogStyles} key={blog.id} />))}

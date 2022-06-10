@@ -22,7 +22,7 @@ function Input({
                         required={isRequired}
                         value={value}
                         onChange={onChange}
-                        rows={5}
+                        rows={10}
                     ></textarea>
                 );
             case 'select':

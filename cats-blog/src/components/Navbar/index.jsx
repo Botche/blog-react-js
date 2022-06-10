@@ -8,7 +8,7 @@ function Navbar() {
 
     return (
         <nav className={styles.navbar}>
-            <h1>The cat blog</h1>
+            <Link className={styles['navbar__link--project-name']} to={routes.homeRoute}>The cat blog</Link>
             <div className={styles.navbar__links}>
                 <Link className={styles.navbar__link} to={routes.homeRoute}>Home</Link>
                 <Link className={styles.navbar__link} to={routes.newBlogRoute}>New blog post</Link>

@@ -5,6 +5,7 @@ const constants = {
         homeRoute: '/',
         newBlogRoute: '/new-blog',
         blogDetailsRoute: '/blogs/:id',
+        blogUpdateRoute: '/blogs/update/:id',
     },
     urls: {
         baseUrl: baseUrl,

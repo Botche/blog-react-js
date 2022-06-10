@@ -1,9 +1,15 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 import constants from 'utils/constants';
+import { generatePageTitle } from 'utils/helperFunctions';
 
 function NotFound() {
+    useEffect(() => {
+        document.title = generatePageTitle('Page not found');
+    }, []);
+    
     return (
         <div className={styles['not-found-container']}>
             <div>
