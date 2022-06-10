@@ -12,6 +12,7 @@ function Navbar() {
             <div className={styles.navbar__links}>
                 <Link className={styles.navbar__link} to={routes.homeRoute}>Home</Link>
                 <Link className={styles.navbar__link} to={routes.newBlogRoute}>New blog post</Link>
+                <Link className={styles.navbar__link} to={routes.newCategoryRoute}>New category post</Link>
             </div>
         </nav>
     );

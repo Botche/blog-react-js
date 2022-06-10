@@ -4,9 +4,10 @@ import Home from 'pages/Home';
 import NotFound from 'pages/NotFound';
 
 import Navbar from 'components/Navbar';
-import Create from 'components/Blog/Create';
+import { default as CreateBlog } from 'components/Blog/Create';
 import Details from 'components/Blog/Details';
 import Update from 'components/Blog/Update';
+import { default as CreateCategory } from 'components/Category/Create';
 
 import styles from './styles.module.scss';
 import constants from 'utils/constants';
@@ -22,9 +23,12 @@ function App() {
         <main>
           <Routes>
             <Route index element={<Home />} />
-            <Route path={routes.newBlogRoute} element={<Create />} />
+
+            <Route path={routes.newBlogRoute} element={<CreateBlog />} />
             <Route path={routes.blogDetailsRoute} element={<Details />} />
             <Route path={routes.blogUpdateRoute} element={<Update />} />
+
+            <Route path={routes.newCategoryRoute} element={<CreateCategory />} />
             <Route path='*' element={<NotFound />} />
           </Routes>
         </main>

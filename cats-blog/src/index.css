@@ -15,7 +15,7 @@ code {
     monospace;
 }
 
-a:link {
+a, a:link {
   font-weight: bold;
   text-decoration: none;
   color: #000000;
