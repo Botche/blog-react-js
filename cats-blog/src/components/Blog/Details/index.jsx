@@ -36,7 +36,7 @@ function Details() {
             })
             .then(blog => {
                 document.title = generatePageTitle(blog.title);
-                const categoryUrl = constants.urls.categoryUrl.replace(':id', blog.id);
+                const categoryUrl = constants.urls.categoryUrl.replace(':id', blog.category);
                 fetch(categoryUrl, {
                     method: 'GET',
                     headers: {

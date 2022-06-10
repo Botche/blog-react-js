@@ -20,11 +20,13 @@ function Update() {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('Mario');
+    const [categoryId, setCategoryId] = useState('');
     const [isPending, setIsPending] = useState(false);
     const [formErrors, setFormErrors] = useState({});
 
     const blogDetailsUrl = constants.urls.blogUrl.replace(':id', id);
     const { data: blog, isLoading, error } = useFetch(blogDetailsUrl);
+    const { data: categories, areCategoriesLoading, errorCategories } = useFetch(constants.urls.categoriesUrl);
 
     const selectOptions = new Map();
     selectOptions.set('Mario', 'Mario');
@@ -32,13 +34,22 @@ function Update() {
 
     useEffect(() => {
         document.title = generatePageTitle('Update blog');
-
+        
         if (blog) {
             setTitle(blog.title);
             setBody(blog.body);
             setAuthor(blog.author);
+            setCategoryId(blog.category);
         }
     }, [blog]);
+
+    const generateCategoriesOptions = () => {
+        const categoriesOptions = new Map();
+
+        categories.map(category => categoriesOptions.set(category.id, category.name));
+
+        return categoriesOptions;
+    };
 
     const handleValidation = () => {
         let formIsValid = true;
@@ -75,6 +86,15 @@ function Update() {
             errors['author'] = "The author must be selected from the dropdown!";
         }
         
+        // Category
+        if (!categoryId) {
+            formIsValid = false;
+            errors['category'] = "Category cannot be empty!";
+        } else if (!categories.some(c => c.id == categoryId)) {
+            formIsValid = false;
+            errors['category'] = "The Category must be selected from the dropdown!";
+        }
+        
         setFormErrors(errors);
         return formIsValid;
     }
@@ -90,6 +110,7 @@ function Update() {
             title,
             body,
             author,
+            category: categoryId,
         };
         
         const blogUpdateUrl = constants.urls.blogUrl.replace(':id', id);
@@ -113,9 +134,9 @@ function Update() {
 
     return (
         <div> 
-            { error && (<Error message={error} />) }
-            { isLoading && <Spinner />}
-            { blog && (
+            { error && errorCategories && (<Error message={error} />) }
+            { isLoading && areCategoriesLoading && <Spinner />}
+            { blog && categories && (
                 <div className={styles['create-blog']}>
                     <h1 className={styles['create-blog__heading']}>Update "{blog.title}"</h1>
                     <FormErrors formErrors={formErrors} />
@@ -149,6 +170,16 @@ function Update() {
                             onChange={(e) => setAuthor(e.target.value)}
                             type='select'
                             options={selectOptions}
+                        />
+                        <Input 
+                            key='cateogy'
+                            id='cateogy' 
+                            name='cateogy'
+                            label='Blog Category' 
+                            value={categoryId}
+                            onChange={(e) => setCategoryId(e.target.value)}
+                            type='select'
+                            options={generateCategoriesOptions()}
                         />
                         
                         {
