@@ -160,6 +160,7 @@ function Create() {
                             id='author' 
                             name='author'
                             label='Blog Author' 
+                            isRequired={true} 
                             value={author}
                             onChange={(e) => setAuthor(e.target.value)}
                             type='select'
@@ -169,7 +170,8 @@ function Create() {
                             key='cateogy'
                             id='cateogy' 
                             name='cateogy'
-                            label='Blog Category' 
+                            label='Blog Category'
+                            isRequired={true}  
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
                             type='select'

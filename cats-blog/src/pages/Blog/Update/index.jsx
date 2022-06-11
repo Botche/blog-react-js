@@ -165,7 +165,8 @@ function Update() {
                             key='author'
                             id='author' 
                             name='author'
-                            label='Blog Author' 
+                            label='Blog Author'
+                            isRequired={true} 
                             value={author}
                             onChange={(e) => setAuthor(e.target.value)}
                             type='select'
@@ -175,7 +176,8 @@ function Update() {
                             key='cateogy'
                             id='cateogy' 
                             name='cateogy'
-                            label='Blog Category' 
+                            label='Blog Category'
+                            isRequired={true}  
                             value={categoryId}
                             onChange={(e) => setCategoryId(e.target.value)}
                             type='select'

@@ -3,6 +3,10 @@
         display: block;
 
         text-align: left;
+
+        &--required {
+            color: #ff0000;
+        }
     }
 
     &__input {

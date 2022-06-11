@@ -62,6 +62,7 @@ function Input({
         <div>
             <label className={styles['input-container__label']} htmlFor={id}>
                 {label}
+                {isRequired && (<span className={styles['input-container__label--required']}>*</span>)}
             </label>
             {generateInputBasedOnType()}
         </div>
