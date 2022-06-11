@@ -4,10 +4,10 @@ import Home from 'pages/Home';
 import NotFound from 'pages/NotFound';
 
 import Navbar from 'components/Navbar';
-import { default as CreateBlog } from 'components/Blog/Create';
-import Details from 'components/Blog/Details';
-import Update from 'components/Blog/Update';
-import { default as CreateCategory } from 'components/Category/Create';
+import { default as CreateBlog } from 'pages/Blog/Create';
+import Details from 'pages/Blog/Details';
+import Update from 'pages/Blog/Update';
+import CreateCategory from 'pages/CreateCategory';
 
 import styles from './styles.module.scss';
 import constants from 'utils/constants';

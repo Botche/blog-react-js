@@ -4,10 +4,10 @@ import { faList, faBorderAll } from '@fortawesome/free-solid-svg-icons'
 
 import useFetch from "hooks/useFetch.jsx";
 
-import BlogList from "components/Blog/BlogList";
+import BlogList from "pages/Blog/BlogList";
 import Spinner from "components/Spinner";
 import Error from "components/Error";
-import BlogGrid from "components/Blog/BlogGrid";
+import BlogGrid from "pages/Blog/BlogGrid";
 
 import constants from "utils/constants";
 import { generatePageTitle } from "utils/helperFunctions";

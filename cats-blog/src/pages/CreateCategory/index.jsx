@@ -9,7 +9,7 @@ import styles from './styles.module.scss';
 import constants from 'utils/constants';
 import { generatePageTitle } from 'utils/helperFunctions';
 
-function Create() {
+function CreateCategory() {
     const navigate = useNavigate();
 
     const [name, setName] = useState('');
@@ -98,4 +98,4 @@ function Create() {
     );
 } 
 
-export default Create;
+export default CreateCategory;

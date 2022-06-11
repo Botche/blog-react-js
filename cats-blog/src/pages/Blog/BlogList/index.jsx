@@ -1,8 +1,8 @@
-import Blog from "components/Blog";
+import Blog from 'pages/Blog';
 
 import styles from './styles.module.scss';
 
-function BlogGrid(props) {
+function BlogList(props) {
     const blogs = props.blogs;
     const blogStyles = {
         'blog-preview': styles['blog-preview'],
@@ -11,10 +11,10 @@ function BlogGrid(props) {
     };
 
     return (
-        <section className={styles['blog-grid']}>
+        <section>
             {blogs.map(blog => (<Blog blog={blog} styles={blogStyles} key={blog.id} />))}
         </section>
     );
 }
 
-  export default BlogGrid;
+export default BlogList;
